@@ -13,8 +13,7 @@ import Starter from "~/components/starter/next-steps/next-steps";
 export default component$(() => {
   return (
     <div>
-      <Inventory title="socks" />
-      <Inventory title="shirts" />
+      <Inventory title="socks" initialItems={["red", "green", "blue"]} />
     </div>
   );
 });
