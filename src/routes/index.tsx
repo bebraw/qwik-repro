@@ -1,19 +1,31 @@
+import { promises as fs } from "fs";
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
 
 import Inventory from "~/components/inventory/inventory";
 
-/*
-import Counter from "~/components/starter/counter/counter";
-import Hero from "~/components/starter/hero/hero";
-import Infobox from "~/components/starter/infobox/infobox";
-import Starter from "~/components/starter/next-steps/next-steps";
-*/
+export const useLoadInventory = routeLoader$(async () => {
+  // This code runs only on the server, after every navigation
+  try {
+    const items = JSON.parse(
+      await fs.readFile("inventory.txt", { encoding: "utf-8" })
+    );
+
+    return items as string[];
+  } catch (error) {
+    // TODO: Figure out what to do now
+  }
+
+  return [];
+});
 
 export default component$(() => {
+  const inventorySignal = useLoadInventory();
+
   return (
     <div>
-      <Inventory title="socks" initialItems={["red", "green", "blue"]} />
+      <Inventory title="socks" initialItems={inventorySignal.value} />
     </div>
   );
 });
