@@ -39,7 +39,7 @@ export default component$(() => {
       if ((e as KeyboardEvent).key === "Alt") {
         gettingStartedStep.value = 1;
       }
-    }),
+    })
   );
 
   return (
@@ -47,7 +47,7 @@ export default component$(() => {
       <h2>
         Time for a
         <br />
-        <span class="highlight">qwik intro</span>?
+        <span class="highlight">qwik intro test</span>?
       </h2>
       <div class={styles.gettingstarted}>
         <div
