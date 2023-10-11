@@ -1,9 +1,19 @@
 // import { component$, useSignal, $ } from "@builder.io/qwik";
-import { component$, useSignal, useTask$ } from "@builder.io/qwik";
+import { component$, useSignal, useTask$, type QRL } from "@builder.io/qwik";
 import { isServer } from "@builder.io/qwik/build";
 
+export type Items = string[];
+
 export default component$(
-  ({ title, initialItems }: { title: string; initialItems: string[] }) => {
+  ({
+    title,
+    initialItems,
+    onItemsChanged,
+  }: {
+    title: string;
+    initialItems: Items;
+    onItemsChanged: QRL<(items: Items) => unknown>;
+  }) => {
     const items = useSignal<string[]>(initialItems);
     const itemCount = useSignal<number>(initialItems.length);
     const inputRef = useSignal<HTMLInputElement>();
@@ -14,6 +24,7 @@ export default component$(
       if (!isServer) {
         itemCount.value = items.value.length;
 
+        onItemsChanged(items.value);
         // console.log(`Items were changed: ${items.value.toString()}`);
       }
     });
@@ -25,7 +36,7 @@ export default component$(
         </div>
         <ul>
           {items.value.map((item, i) => (
-            <li>
+            <li key={item}>
               {item}{" "}
               <button
                 onClick$={() => {
