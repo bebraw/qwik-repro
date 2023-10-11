@@ -30,11 +30,11 @@ export default component$(
     });
 
     return (
-      <div>
+      <div class="m-4">
         <div>
           {title}: {itemCount}
         </div>
-        <ul>
+        <ul class="m-2 flex flex-row gap-8">
           {items.value.map((item, i) => (
             <li key={item}>
               {item}{" "}
@@ -77,5 +77,5 @@ export default component$(
         </div>
       </div>
     );
-  }
+  },
 );
