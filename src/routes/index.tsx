@@ -9,7 +9,7 @@ export const useLoadInventory = routeLoader$(async () => {
   // This code runs only on the server, after every navigation
   try {
     const items = JSON.parse(
-      await fs.readFile("inventory.txt", { encoding: "utf-8" })
+      await fs.readFile("inventory.txt", { encoding: "utf-8" }),
     );
 
     return items as string[];
@@ -42,12 +42,14 @@ export default component$(() => {
   const inventorySignal = useLoadInventory();
   const setInventory = useSetInventory();
 
+  // onItemsChanged={$((inventory: Items) => setInventory.submit(inventory))} works
+  // console.log fails (npm run dev)
   return (
     <div>
       <Inventory
         title="socks"
         initialItems={inventorySignal.value}
-        onItemsChanged={$((inventory: Items) => setInventory.submit(inventory))}
+        onItemsChanged={$((inventory: Items) => console.log(inventory))}
       />
     </div>
   );
