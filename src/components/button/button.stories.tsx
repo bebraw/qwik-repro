@@ -9,9 +9,23 @@ type Story = StoryObj<ButtonProps>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Small: Story = {
+  args: {
+    size: "small",
+  },
+  render: (props) => <Button {...props}>Some button</Button>,
+};
+
+export const Medium: Story = {
   args: {
     size: "medium",
   },
-  render: (props) => <Button {...props}>Some button</Button>,
+  render: (props) => <Button {...props}>Medium button</Button>,
+};
+
+export const Large: Story = {
+  args: {
+    size: "large",
+  },
+  render: (props) => <Button {...props}>Large button</Button>,
 };
