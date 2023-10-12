@@ -11,12 +11,14 @@ export const Button = component$<ButtonProps>(({ size = "medium" }) => {
   };
 
   return (
-    <button
-      class={{
-        [`bg-red-200 text-${sizeMap[size]}`]: true,
-      }}
-    >
-      <Slot></Slot>
-    </button>
+    <div class="m-4 bg-gray-500">
+      <button
+        class={{
+          [`bg-red-200 text-${sizeMap[size]}`]: true,
+        }}
+      >
+        <Slot></Slot>
+      </button>
+    </div>
   );
 });
